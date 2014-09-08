@@ -1,6 +1,11 @@
 @extends('layouts.home')
-@section('sidebar')
-    @parent	
+@section('navbar')
+    @parent	 
+     <style type="text/css">
+    	body{
+    		background: #eee;
+    	}
+    </style>  
 @stop
 
 @section('content')
@@ -20,9 +25,9 @@
     <div class="modal-content">
 	    {{ Form::open(array('url'=>'users/signup', 'role'=>'form', 'class'=>'form-signin', 'id'=> 'signup-form'))}}
 	        <h2 class="form-signin-heading text-center">Sign up</h2>
-	        <input type="text" class="form-control" placeholder="Name" required="" autofocus="">
-	        <input type="email" class="form-control" placeholder="Email" required="">
-	        <input type="password" class="form-control" placeholder="Password" required="">
+	        <input type="text" name="name" class="form-control" placeholder="Name" required="" autofocus="">
+	        <input type="email" name="email" class="form-control" placeholder="Email" required="">
+	        <input type="password" name="password" class="form-control" placeholder="Password" required="">
 	        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 	    {{ Form::close() }}
     </div>

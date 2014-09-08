@@ -15,6 +15,7 @@ class HomeController extends BaseController {
 		$this->layout->content = View::make('home.profile');
 	}
 	public function contactsPage(){
-		$this->layout->content = View::make('home.contacts');
+		$contacts = Contact::all();
+		$this->layout->content = View::make('home.contacts', compact('contacts'));
 	}
 }

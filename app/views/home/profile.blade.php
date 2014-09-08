@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('sidebar')
+@section('navbar')
     @parent	
 @stop
 
@@ -7,8 +7,10 @@
     <div class="container">
     	<div class="row">
     		<h1>Profile</h1>
-    	</div>
+    		<hr>
+    	</div>    	
     	<div class="row">
+    		<h2>dgdf</h2>
     	</div>
     </div>
 @stop

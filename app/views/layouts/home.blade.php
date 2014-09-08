@@ -35,7 +35,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="{{URL::to('/')}}">
-                        Laravel-Contacts
+                        <i class="fa fa-users"></i> Laravel-Contacts
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->

@@ -1,14 +1,18 @@
 body {
-  padding-top: 100px;
+  padding-top: 60px;
   padding-bottom: 40px;
-  background-color: #eee;
+  background-color: #fff;
+}
+.fa-users{
+  color: tomato;
 }
 .fa-10x{
-	font-size: 10em;
-	color: tomato;
+	font-size: 10em;	
 }
 #footer{
-	bottom: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 .form-signin {
   max-width: 330px;
@@ -54,4 +58,7 @@ body {
 }
 .modal-dialog{
 	margin-top: 100px;
+}
+.btn-border-less{
+  border: 0;
 }
