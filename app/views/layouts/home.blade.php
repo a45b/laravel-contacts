@@ -5,11 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Laravel Contacts">
         <meta name="keywords" content="Laravel Contacts">
-
-
-        <title>Laravel Contacts</title>
-        
-        
+        <title>Laravel Contacts</title>       
         <!-- css -->
   	    {{ HTML::style('packages/bootstrap/css/bootstrap.min.css')}}
         {{ HTML::style('packages/bootstrapvalidator/css/bootstrapValidator.min.css')}}
