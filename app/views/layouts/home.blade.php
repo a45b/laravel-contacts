@@ -11,9 +11,10 @@
         {{ HTML::style('packages/bootstrapvalidator/css/bootstrapValidator.min.css')}}
         {{ HTML::style('packages/font-awesome/css/font-awesome.min.css')}}
         {{ HTML::style('packages/alertifyjs/css/alertify.min.css')}}
+        {{ HTML::style('packages/alertifyjs/css/default.min.css')}}
         {{ HTML::style('packages/application/css/application.css')}}
         <!-- js -->
-        {{ HTML::script('packages/jquery/js/jquery-2.1.1.min.js');}}
+        {{ HTML::script('packages/jquery/js/jquery.min.js');}}
         {{ HTML::script('packages/bootstrap/js/bootstrap.min.js');}}        
         {{ HTML::script('packages/bootstrapvalidator/js/bootstrapValidator.min.js');}}
         {{ HTML::script('packages/alertifyjs/js/alertify.min.js');}}

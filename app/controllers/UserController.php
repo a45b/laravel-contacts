@@ -13,9 +13,8 @@ class UserController extends BaseController {
             return Redirect::to('contact');
         }
         else{
-            return Redirect::to('/');
+            return Redirect::to('/?login=fail')->with('error', 'Email or Password is Incorrect');
         }
-        //return Response::json(Input::all());
     }
     public function postSignup() {        
         $validator = Validator::make(Input::all(), User::$rules);
