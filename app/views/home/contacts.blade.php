@@ -2,17 +2,17 @@
 @section('sidebar')
     @parent
 @stop
-
 @section('content')
     <div class="container">
     	<div class="row">
-    		<h1>Contacts <button class="btn btn-default pull-right" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span> Add</button></h1>
+    		<h1 class="text-center">Contacts <button class="btn btn-info" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span> Add</button></h1>
     		<hr>
     	</div>        
     	<div class="row">
-            <table class="table">
+            <table class="table table-hover" id="contact-table">
                 <thead>
                     <th>#</th>
+                    <th>Photo</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Mobile</th>
@@ -25,7 +25,7 @@
                     <tr>
                         <td>{{$i++}}</td>
                         <?php $img = "uploads/".$contact->photoid.".jpg"; ?>
-                        <td><img class="img-responsive" style="width:50px; height: 50px;" alt="photo" src="{{asset($img)}}"></td>
+                        <td><img class="img-responsive" style="width:20px; height: 20px;" alt="photo" src="{{asset($img)}}"></td>
                         <td>{{$contact->name}}</td>
                         <td>{{$contact->email}}</td>
                         <td>{{$contact->mobile}}</td>
@@ -39,7 +39,7 @@
     </div>
     <!-- Add Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-sm" style="margin-top: 0px;">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -70,13 +70,14 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="saveContact();">Save</button>
+            <button type="button" class="btn btn-primary" id="saveContactBtn" onclick="saveContact();">Save</button>
           </div>
         </div>
       </div>
     </div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
+        $('#contacts_li').addClass('active');
         var data_url = 0;
         var fname = 0;
         function readURL(input){
@@ -111,6 +112,7 @@
         function saveContact(){
             var res = $('form#contact-form').data('bootstrapValidator').validate();
             if(res.isValid() == true){
+                $('#saveContactBtn').attr('disabled', true);
                 var formData = $('form#contact-form').serializeArray();
                 formData.push({name: 'fname', value: fname});
                 $.ajax({
@@ -118,7 +120,24 @@
                     url: '../contacts/create',
                     dataType: 'JSON',
                     data: formData,
-                    success: function(data){
+                    success: function(resp){
+                        var data = getContact(resp);
+                        var row = '<tr>'
+                            +'<td>'+data['id']+'</td>'
+                            +'<td><img class="img-responsive" style="width:20px; height: 20px;" alt="photo" src="http://localhost:8000/uploads/'+data['photoid']+'.jpg"></td>'
+                            +'<td>'+data['name']+'</td>'
+                            +'<td>'+data['email']+'</td>'
+                            +'<td>'+data['mobile']+'</td>'
+                            +'<td><button class="btn btn-default btn-border-less"><span class="glyphicon glyphicon-edit text-info"></span></button></td>'
+                            +'<td><button class="btn btn-default btn-border-less"><span class="glyphicon glyphicon-trash text-danger"></span></button></td>'
+                        +'</tr>';
+                        $('table#contact-table tbody').prepend(row);
+                        $('#saveContactBtn').attr('disabled', false);
+                        $('#addModal').modal('hide');
+                        alertify.success('Saved Successfully');
+                        $row = $('table#contact-table tbody tr').first();
+                        $class = 'alert alert-success';
+                        rowActive($row,$class);
                     }
                 });
             }
@@ -161,5 +180,24 @@
                 }
             });
         });
-    </script>
+
+    function getContact(id){
+        $.ajax({
+            type: 'GET',
+            url: '../contacts/contact',            
+            dataType: 'JSON',
+            data: {'id':id},
+            success: function(data){
+                return data;
+            }
+        });
+    }
+
+    function rowActive($row, $class){
+        $row.addClass($class);
+        setTimeout(function(){
+            $row.removeClass($class);
+        },2000);                    
+    }
+</script>
 @stop

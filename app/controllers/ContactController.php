@@ -11,6 +11,12 @@ class ContactController extends BaseController {
 	{
 		$this->layout->content = View::make('user.index');
 	}
+	public function getContact()
+	{
+		$id = Input::get('id');
+		$contacts = Contact::find($id);
+		return Response::json($contacts);
+	}
 	public function postDataimg()
 	{		
 		$name = Input::get('fname');
